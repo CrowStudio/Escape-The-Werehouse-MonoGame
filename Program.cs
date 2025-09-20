@@ -1,2 +1,2 @@
-﻿using var game = new Escape_The_Werehouse_MonoGame.Game1();
+﻿using var game = new EscapeTheWerehouse_MonoGame.EscapeTheWerehouse();
 game.Run();
