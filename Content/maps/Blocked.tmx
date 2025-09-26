@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="8" nextobjectid="17">
  <tileset firstgid="1" source="sprite_sheet.tsx"/>
- <layer id="1" name="map" width="6" height="6">
+ <layer id="1" name="Blocked!" width="6" height="6">
   <properties>
    <property name="heightOffset" type="int" value="40"/>
    <property name="level" type="int" value="1"/>
@@ -15,11 +15,11 @@
   </properties>
   <data encoding="csv">
 30,38,39,103,18,51,
-103,103,103,103,103,103,
-41,103,103,103,103,103,
-31,103,46,103,47,103,
+103,103,103,103,103,51,
+41,41,47,56,56,103,
+31,103,46,22,47,103,
 52,103,47,42,103,103,
-54,103,103,40,103,103
+93,103,103,40,103,103
 </data>
  </layer>
  <objectgroup id="5" name="Elements">

@@ -7,6 +7,7 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
+using System;
 using System.Diagnostics;
 
 namespace EscapeTheWerehouse_MonoGame
@@ -22,6 +23,9 @@ namespace EscapeTheWerehouse_MonoGame
         private TiledMapObjectLayer _tiledElementObjects;
 
         private TiledMapObjectLayer _tiledEntityObjects;
+
+        private static int _offset = 40;
+        private static int _tiledObjectOffset = 100 - _offset;
 
         public EscapeTheWerehouse() : base("Escape The Werehouse!", 600, 640, false)
         {
@@ -157,7 +161,18 @@ namespace EscapeTheWerehouse_MonoGame
             // Begin the sprite batch to prepare for rendering.
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            _tiledMapRenderer.Draw();
+            DrawTileMap();
+
+            SpriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        private void DrawTileMap()
+        {
+            // Apply a translation matrix to offset the entire map
+            Matrix translationMatrix = Matrix.CreateTranslation(0, _offset, 0); // Offset by 40 pixels down (Y-axis)
+            _tiledMapRenderer.Draw(translationMatrix);
 
             foreach (TiledMapObject obj in _tiledElementObjects.Objects)
             {
@@ -168,10 +183,6 @@ namespace EscapeTheWerehouse_MonoGame
             {
                 DrawObject(obj);
             }
-
-            SpriteBatch.End();
-
-            base.Draw(gameTime);
         }
 
         private void DrawObject(TiledMapObject obj)
@@ -187,7 +198,7 @@ namespace EscapeTheWerehouse_MonoGame
                 // Adjust position if needed (e.g., subtract tile height)
                 Vector2 drawPosition = new Vector2(
                     tileObj.Position.X,
-                    tileObj.Position.Y - _tiledMap.TileHeight // Remove if not needed
+                    tileObj.Position.Y - _tiledObjectOffset
                 );
 
                 SpriteBatch.Draw(

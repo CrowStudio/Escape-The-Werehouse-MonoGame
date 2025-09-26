@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="sprite_sheet" tilewidth="100" tileheight="100" tilecount="121" columns="11">
+<tileset version="1.10" tiledversion="1.11.2" name="sprite_sheet" tilewidth="100" tileheight="100" tilecount="121" columns="11" backgroundcolor="#1e1e1e" objectalignment="bottomleft">
  <image source="sprite_sheet.png" width="1100" height="1100"/>
  <tile id="92"/>
  <tile id="102"/>

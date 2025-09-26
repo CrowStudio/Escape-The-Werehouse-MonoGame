@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="11">
  <tileset firstgid="1" source="sprite_sheet.tsx"/>
- <layer id="1" name="map" width="6" height="6">
+ <layer id="1" name="One Too Many!" width="6" height="6">
   <data encoding="csv">
 44,26,103,103,103,18,
 27,26,25,56,0,55,
