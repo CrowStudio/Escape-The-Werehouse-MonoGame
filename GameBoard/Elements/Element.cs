@@ -108,7 +108,7 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
         public PitState PitState { get; set; }              // Empty / HalfFilled / Filled
         public bool IsActive { get; set; }                  // Current state
 
-        public bool TryFill(Box box)
+        public bool TryFill()
         {
             if (PitState == PitState.Filled)
             {
@@ -174,7 +174,7 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
         public PitState PitState { get; set; }              // Empty / Filled
         public bool IsActive { get; set; }                  // Current state
 
-        public bool TryFill(Box box)
+        public bool TryFill()
         {
             if (PitState == PitState.Filled)
             {

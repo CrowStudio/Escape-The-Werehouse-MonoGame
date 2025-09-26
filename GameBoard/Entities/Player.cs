@@ -6,28 +6,17 @@ using EscapeTheWerehouse_MonoGame.GameBoard.Elements;
 namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
 
 {
-    public class Player
+    public class Player(Texture2D texture, Vector2 startPosition)
     {
         // Position and movement
-        public Vector2 Position { get; private set; }
-        public Direction FacingDirection { get; private set; }
-        public Texture2D Texture { get; set; } // Player sprite
+        public Vector2 Position { get; private set; } = startPosition;
+        public Direction FacingDirection { get; private set; } = Direction.Down; // Default direction
+        public Texture2D Texture { get; set; } = texture;
         public int MoveSpeed { get; set; } = 1; // Tiles per move
 
         // Health and status
         public int Lives { get; private set; } = 3;
         public bool IsAlive => Lives > 0;
-
-        //// For animation
-        //public Rectangle SourceRectangle { get; private set; }
-
-        public Player(Texture2D texture, Vector2 startPosition)
-        {
-            Texture = texture;
-            Position = startPosition;
-            FacingDirection = Direction.Down; // Default direction
-            //SourceRectangle = new Rectangle(0, 0, Texture.Width, Texture.Height);
-        }
 
         //// Update player state (called every frame)
         //public void Update(GameTime gameTime, Level level)
@@ -67,17 +56,14 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
         //}
 
         // Helper: Convert direction to a vector
-        private Vector2 GetDirectionVector(Direction direction)
+        private Vector2 GetDirectionVector(Direction direction) => direction switch
         {
-            return direction switch
-            {
-                Direction.Up => new Vector2(0, -1),
-                Direction.Down => new Vector2(0, 1),
-                Direction.Left => new Vector2(-1, 0),
-                Direction.Right => new Vector2(1, 0),
-                _ => Vector2.Zero
-            };
-        }
+            Direction.Up => new Vector2(0, -1),
+            Direction.Down => new Vector2(0, 1),
+            Direction.Left => new Vector2(-1, 0),
+            Direction.Right => new Vector2(1, 0),
+            _ => Vector2.Zero
+        };
 
         //// Handle damage
         //public void TakeDamage(int damage)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" nextlayerid="4" nextobjectid="31">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-down" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="31">
  <tileset firstgid="1" source="sprite_sheet.tsx"/>
  <layer id="1" name="map" width="6" height="6">
   <properties>
@@ -16,9 +16,9 @@
 </data>
  </layer>
  <objectgroup id="2" name="Elements">
-  <object id="18" type="BottomlessPit" gid="78" x="200" y="600" width="100" height="100"/>
-  <object id="19" type="BottomlessPit" gid="78" x="0" y="500" width="100" height="100"/>
-  <object id="20" type="BottomlessPit" gid="78" x="0" y="600" width="100" height="100"/>
+  <object id="18" name="BottomlessPit" type="BottomlessPit" gid="78" x="200" y="600" width="100" height="100"/>
+  <object id="19" name="BottomlessPit" type="BottomlessPit" gid="78" x="0" y="500" width="100" height="100"/>
+  <object id="20" name="BottomlessPit" type="BottomlessPit" gid="78" x="0" y="600" width="100" height="100"/>
   <object id="21" name="Pit1" type="Pit" gid="79" x="400" y="300" width="100" height="100">
    <properties>
     <property name="Id" type="int" value="1"/>
@@ -26,12 +26,12 @@
     <property name="PitState" type="int" value="0"/>
    </properties>
   </object>
-  <object id="22" type="BottomlessPit" gid="78" x="500" y="200" width="100" height="100"/>
-  <object id="23" type="BottomlessPit" gid="78" x="500" y="100" width="100" height="100"/>
-  <object id="24" name="BottomLessPit" type="BottomLessPit" gid="78" x="300" y="300" width="100" height="100"/>
-  <object id="25" type="BottomlessPit" gid="78" x="200" y="300" width="100" height="100"/>
-  <object id="26" type="BottomlessPit" gid="78" x="100" y="300" width="100" height="100"/>
-  <object id="27" type="BottomlessPit" gid="78" x="0" y="300" width="100" height="100"/>
+  <object id="22" name="BottomlessPit" type="BottomlessPit" gid="78" x="500" y="200" width="100" height="100"/>
+  <object id="23" name="BottomlessPit" type="BottomlessPit" gid="78" x="500" y="100" width="100" height="100"/>
+  <object id="24" name="BottomlessPit" type="BottomLessPit" gid="78" x="300" y="300" width="100" height="100"/>
+  <object id="25" name="BottomlessPit" type="BottomlessPit" gid="78" x="200" y="300" width="100" height="100"/>
+  <object id="26" name="BottomlessPit" type="BottomlessPit" gid="78" x="100" y="300" width="100" height="100"/>
+  <object id="27" name="BottomlessPit" type="BottomlessPit" gid="78" x="0" y="300" width="100" height="100"/>
  </objectgroup>
  <objectgroup id="3" name="Entities">
   <object id="1" name="Player" type="Player" gid="1" x="100" y="600" width="100" height="100">

@@ -10,23 +10,18 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\..\.nuget\packages\dotnet-mgcb\3.8.4\tools\net8.0\any\MonoGame.Framework.Content.Pipeline.dll
-/reference:..\..\..\..\.nuget\packages\monogame.content.builder.task\3.8.4\build\dotnet-tools\.store\dotnet-mgcb\3.8.4\dotnet-mgcb\3.8.4\tools\net8.0\any\MonoGame.Framework.Content.Pipeline.dll
+/reference:..\..\..\..\.nuget\packages\monogame.extended\5.1.0\lib\net8.0\MonoGame.Extended.dll
+/reference:..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\5.1.0\lib\net8.0\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin maps/Blocked.xml
-/copy:maps/Blocked.xml
+#begin maps/Blocked.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/Blocked.tmx
 
-#begin maps/sprite_sheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/sprite_sheet.png
+#begin maps/sprite_sheet.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:maps/sprite_sheet.tsx
 

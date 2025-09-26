@@ -7,38 +7,24 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
-using System;
+using System.Diagnostics;
 
 namespace EscapeTheWerehouse_MonoGame
 {
     public class EscapeTheWerehouse : Core
     {
         Color backgroundColor;
-        
-        // Defines the slime animated sprite.
-        private Texture2D _player;
 
-        // Tracks the position of the player.
-        private Vector2 _playerPosition;
+        private TiledMap _tiledMap;
 
-        // Speed multiplier when moving.
-        private const float MOVEMENT_SPEED = 5.0f;
+        private TiledMapRenderer _tiledMapRenderer;
 
-        //private TiledMap _tiledMap;
+        private TiledMapObjectLayer _tiledElementObjects;
 
-        //private TiledMapRenderer _tiledMapRenderer;
-
-        //private SpriteBatch _spriteBatch;
-
-        // Defines the tilemap to draw.
-        private Tilemap _tilemap;
-
-        // Defines the bounds of the room that the slime and bat are contained within.
-        private Rectangle _levelBounds;
+        private TiledMapObjectLayer _tiledEntityObjects;
 
         public EscapeTheWerehouse() : base("Escape The Werehouse!", 600, 640, false)
         {
-
         }
 
         protected override void Initialize()
@@ -46,26 +32,17 @@ namespace EscapeTheWerehouse_MonoGame
             backgroundColor = new Color(30, 30, 30);
 
             base.Initialize();
-            Rectangle screenBounds = GraphicsDevice.PresentationParameters.Bounds;
-
-            _levelBounds = new Rectangle(
-                 (int)_tilemap.TileWidth,
-                 (int)_tilemap.TileHeight,
-                 screenBounds.Width - (int)_tilemap.TileWidth * 2,
-                 screenBounds.Height - (int)_tilemap.TileHeight * 2
-             );
-
-
         }
 
         protected override void LoadContent()
         {
-            //_tiledMap = Content.Load<TiledMap>("maps/Blocked");
-            //_tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-            //_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Create the tilemap from the XML configuration file.
-            _tilemap = Tilemap.FromFile(Content, "maps/Blocked.xml");
+            _tiledMap = Content.Load<TiledMap>("maps/Blocked");
+
+            _tiledElementObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Elements");
+            _tiledEntityObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Entities");
+
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
             base.LoadContent();
         }
@@ -81,7 +58,7 @@ namespace EscapeTheWerehouse_MonoGame
             //// Check for gamepad input and handle it.
             //CheckGamePadInput();
 
-            //_tiledMapRenderer.Update(gameTime);
+            _tiledMapRenderer.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -180,16 +157,54 @@ namespace EscapeTheWerehouse_MonoGame
             // Begin the sprite batch to prepare for rendering.
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            //_tiledMapRenderer.Draw();
+            _tiledMapRenderer.Draw();
 
-            // Draw the tilemap.
-            _tilemap.Draw(SpriteBatch);
+            foreach (TiledMapObject obj in _tiledElementObjects.Objects)
+            {
+                DrawObject(obj);
+            }
 
-            // Always end the sprite batch when finished.
+            foreach (TiledMapObject obj in _tiledEntityObjects.Objects)
+            {
+                DrawObject(obj);
+            }
+
             SpriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        private void DrawObject(TiledMapObject obj)
+        {
+            if (obj is TiledMapTileObject tileObj)
+            {
+                int gid = tileObj.Tile.LocalTileIdentifier;
+                var tileset = tileObj.Tileset;
+                if (tileset == null) return;
+
+                Rectangle sourceRect = tileset.GetTileRegion(gid);
+
+                // Adjust position if needed (e.g., subtract tile height)
+                Vector2 drawPosition = new Vector2(
+                    tileObj.Position.X,
+                    tileObj.Position.Y - _tiledMap.TileHeight // Remove if not needed
+                );
+
+                SpriteBatch.Draw(
+                    texture: tileset.Texture,
+                    position: drawPosition,
+                    sourceRectangle: sourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
+        }
+
+
 
     }
 }
