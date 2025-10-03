@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="10">
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <layer id="1" name="The Circle of Life" width="6" height="6">
+  <properties>
+   <property name="level" type="int" value="5"/>
+   <property name="minimumMoves" type="int" value="78"/>
+  </properties>
+  <data encoding="csv">
+57,57,58,23,42,46,
+0,0,0,0,0,45,
+58,39,45,53,46,42,
+61,0,59,56,60,0,
+37,0,0,0,0,54,
+93,0,0,32,30,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Elements">
+  <object id="9" template="../object-templates/Exit.tx" x="200" y="600"/>
+  <object id="6" template="../object-templates/Pit1.tx" x="200" y="200"/>
+  <object id="7" template="../object-templates/Pit2.tx" gid="78" x="500" y="400" width="100" height="100"/>
+  <object id="8" template="../object-templates/Pit3.tx" gid="86" x="500" y="600" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="3" name="Entities">
+  <object id="2" template="../object-templates/Box1.tx" gid="17" x="400" y="300" width="100" height="100"/>
+  <object id="5" template="../object-templates/Box2.tx" x="100" y="100"/>
+  <object id="4" template="../object-templates/Box3.tx" x="0" y="100"/>
+  <object id="1" template="../object-templates/Player.tx" x="0" y="600"/>
+ </objectgroup>
+</map>

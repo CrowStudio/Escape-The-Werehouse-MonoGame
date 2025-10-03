@@ -1,14 +1,113 @@
 {
-    "automappingRulesFile": "",
+    "automappingRulesFile": "rules.txt",
     "commands": [
     ],
     "compatibilityVersion": 1100,
-    "extensionsPath": "extensions",
+    "extensionsPath": ".",
     "folders": [
         "."
     ],
     "properties": [
     ],
     "propertyTypes": [
+        {
+            "id": 13,
+            "name": "BeltSpeed",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Normal",
+                "Fast"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 8,
+            "name": "ConnectionType",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "SlidingDoor",
+                "TrapDoor",
+                "Pusher",
+                "ConveyorBelt",
+                "LazerBeam",
+                "Elevator"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 9,
+            "name": "DefaultState",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "NormallyOn",
+                "NormallyOff",
+                "NormallyOpen",
+                "NormallyClosed"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 10,
+            "name": "Direction",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Up",
+                "Down",
+                "Left",
+                "Right"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 11,
+            "name": "Orientation",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Horizontal",
+                "Vertical"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 6,
+            "name": "PitState",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Empty",
+                "HalfFilled",
+                "Filled"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 12,
+            "name": "PusherType",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Normal",
+                "Powerful"
+            ],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 7,
+            "name": "SwitchType",
+            "storageType": "int",
+            "type": "enum",
+            "values": [
+                "Latching",
+                "LatchingExit",
+                "Momentary",
+                "MomentaryExit"
+            ],
+            "valuesAsFlags": false
+        }
     ]
 }

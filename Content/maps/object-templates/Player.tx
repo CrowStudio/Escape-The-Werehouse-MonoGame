@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <object name="Player" type="Player" gid="1" width="100" height="100">
+  <properties>
+   <property name="Direction" type="int" propertytype="Direction" value="0"/>
+   <property name="Lives" value="3"/>
+  </properties>
+ </object>
+</template>

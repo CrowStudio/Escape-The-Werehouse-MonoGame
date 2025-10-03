@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="12">
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <layer id="1" name="Essence of Order" width="6" height="6">
+  <properties>
+   <property name="level" type="int" value="7"/>
+   <property name="minimumMoves" type="int" value="36"/>
+  </properties>
+  <data encoding="csv">
+0,0,26,41,31,60,
+0,0,0,26,60,32,
+0,0,0,35,0,61,
+25,52,61,0,0,39,
+32,0,0,29,29,28,
+54,93,0,56,51,29
+</data>
+ </layer>
+ <objectgroup id="2" name="Elements">
+  <object id="11" template="../object-templates/Exit.tx" x="0" y="100"/>
+  <object id="1" template="../object-templates/Pit1.tx" gid="80" x="300" y="400" width="100" height="100"/>
+  <object id="2" template="../object-templates/Pit2.tx" x="200" y="200"/>
+  <object id="3" template="../object-templates/Pit3.tx" x="100" y="200"/>
+  <object id="4" template="../object-templates/Pit4.tx" x="0" y="200"/>
+ </objectgroup>
+ <objectgroup id="3" name="Entities">
+  <object id="6" template="../object-templates/Box1.tx" gid="17" x="100" y="400" width="100" height="100"/>
+  <object id="7" template="../object-templates/Box2.tx" gid="17" x="300" y="500" width="100" height="100"/>
+  <object id="8" template="../object-templates/Box3.tx" x="500" y="200"/>
+  <object id="9" template="../object-templates/Box4.tx" x="200" y="100"/>
+  <object id="5" template="../object-templates/Player.tx" x="100" y="600"/>
+ </objectgroup>
+</map>

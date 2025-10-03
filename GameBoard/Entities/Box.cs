@@ -1,21 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using EscapeTheWerehouse_MonoGame.GameBoard.Elements;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary;
 
 namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
 {
-    public class Box
+    public class Box : GameObject
     {
-        public int Id { get; set; }
-        public Vector2 Position { get; set; }
-        public Texture2D Texture { get; set; }
-        public int BoxInPit { get; set; }
         public bool IsActive { get; set; } = true; // True if not destroyed (e.g., by BottomlessPit)
-
-        public Box(Texture2D texture, Vector2 startPosition)
-        {
-            Texture = texture;
-            Position = startPosition;
-        }
 
         ////Move the box in a direction(called by player or conveyor belts)
         //public bool Move(Vector2 direction, Level level)
@@ -41,11 +33,28 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
         //    return true;
         //}
 
+        public override void Update(GameTime gameTime)
+        {
+
+        }
+
         // Draw the box
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (IsActive)
-                spriteBatch.Draw(Texture, Position, Color.White);
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
         }
     }
 }

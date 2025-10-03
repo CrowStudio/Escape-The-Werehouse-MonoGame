@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="25">
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <layer id="1" name="One Too Many!" width="6" height="6">
+  <properties>
+   <property name="level" type="int" value="3"/>
+   <property name="minimumMoves" type="int" value="35"/>
+  </properties>
+  <data encoding="csv">
+44,26,0,0,0,0,
+27,26,25,56,0,55,
+55,41,0,0,0,0,
+0,0,45,53,27,93,
+57,40,24,23,0,0,
+61,27,26,40,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Elements">
+  <object id="24" template="../object-templates/Exit.tx" x="500" y="100"/>
+  <object id="16" template="../object-templates/Pit1.tx" x="0" y="400"/>
+  <object id="15" template="../object-templates/Pit2.tx" gid="83" x="400" y="200" width="100" height="100"/>
+  <object id="17" template="../object-templates/Pit3.tx" x="400" y="300"/>
+  <object id="18" template="../object-templates/BottomlessPit.tx" x="500" y="500"/>
+ </objectgroup>
+ <objectgroup id="2" name="Entities">
+  <object id="22" template="../object-templates/Box1.tx" gid="11" x="200" y="600" width="100" height="100"/>
+  <object id="13" template="../object-templates/Box2.tx" x="100" y="100"/>
+  <object id="12" template="../object-templates/Box3.tx" gid="6" x="0" y="100" width="100" height="100"/>
+  <object id="14" template="../object-templates/Box4.tx" x="500" y="200"/>
+  <object id="19" template="../object-templates/Player.tx" x="500" y="400">
+   <properties>
+    <property name="Direction" type="int" propertytype="Direction" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

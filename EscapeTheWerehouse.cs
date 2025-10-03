@@ -1,44 +1,44 @@
 ﻿using EscapeTheWerehouse_MonoGame.GameBoard;
+using EscapeTheWerehouse_MonoGame.GameBoard.Elements;
+using EscapeTheWerehouse_MonoGame.GameBoard.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Collisions.Layers;
+using MonoGame.Extended.ECS;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Xml.Linq;
 
 namespace EscapeTheWerehouse_MonoGame
 {
     public class EscapeTheWerehouse : Core
     {
         Color backgroundColor;
-        
-        // Defines the slime animated sprite.
-        private Texture2D _player;
 
-        // Tracks the position of the player.
-        private Vector2 _playerPosition;
+        private TiledMap _tiledMap;
 
-        // Speed multiplier when moving.
-        private const float MOVEMENT_SPEED = 5.0f;
+        private TiledMapRenderer _tiledMapRenderer;
 
-        //private TiledMap _tiledMap;
+        private TiledMapObjectLayer _tiledElementObjects;
 
-        //private TiledMapRenderer _tiledMapRenderer;
+        private TiledMapObjectLayer _tiledEntityObjects;
 
-        //private SpriteBatch _spriteBatch;
+        private List<GameObject> _gameObjects = [];
 
-        // Defines the tilemap to draw.
-        private Tilemap _tilemap;
-
-        // Defines the bounds of the room that the slime and bat are contained within.
-        private Rectangle _levelBounds;
+        private const int Offset = 40;
+        private const int TiledObjectOffset = 100 - Offset;
 
         public EscapeTheWerehouse() : base("Escape The Werehouse!", 600, 640, false)
         {
-
         }
 
         protected override void Initialize()
@@ -46,29 +46,152 @@ namespace EscapeTheWerehouse_MonoGame
             backgroundColor = new Color(30, 30, 30);
 
             base.Initialize();
-            Rectangle screenBounds = GraphicsDevice.PresentationParameters.Bounds;
-
-            _levelBounds = new Rectangle(
-                 (int)_tilemap.TileWidth,
-                 (int)_tilemap.TileHeight,
-                 screenBounds.Width - (int)_tilemap.TileWidth * 2,
-                 screenBounds.Height - (int)_tilemap.TileHeight * 2
-             );
-
-
         }
 
         protected override void LoadContent()
         {
-            //_tiledMap = Content.Load<TiledMap>("maps/Blocked");
-            //_tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
-            //_spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Create the tilemap from the XML configuration file.
-            _tilemap = Tilemap.FromFile(Content, "maps/Blocked.xml");
+            _tiledMap = Content.Load<TiledMap>("maps/zone1/Pitorama");                      // Sort out map path later, to be able to load the maps dynamically
+            _tiledElementObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Elements");     // Elements like pits, switches, doors, etc.
+            _tiledEntityObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Entities");      // ATM only player and boxes
+            _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+
+            LoadElements();
+            LoadEntities();
+            PrintAllGameObjects(_gameObjects);                                              // Debug print to see that all objects are created with correct variables
 
             base.LoadContent();
         }
+
+
+        private void LoadElements()
+        {
+            foreach (TiledMapObject element in _tiledElementObjects.Objects)
+            {
+                string elementName = element.Name;
+                string objectName = System.Text.RegularExpressions.Regex.Replace(elementName, @"[\d-]", string.Empty);
+                Debug.WriteLine($"Object Name: {objectName}");
+                Type objectType = Type.GetType("EscapeTheWerehouse_MonoGame.GameBoard.Elements." + objectName);
+                if (objectType != null)
+                {
+                    // Instantiate the object
+                    GameObject gameObject = (GameObject)Activator.CreateInstance(objectType);
+
+                    // Set position and size
+                    gameObject.Position = new Vector2(element.Position.X, element.Position.Y - TiledObjectOffset);
+
+                    // Only set SourceRectangle if the entity is a TiledMapTileObject
+                    if (element is TiledMapTileObject tileElement)
+                    {
+                        int gid = tileElement.Tile.LocalTileIdentifier;
+                        var tileset = tileElement.Tileset;
+                        if (tileset != null)
+                        {
+                            Rectangle sourceRect = tileset.GetTileRegion(gid);
+                            gameObject.SourceRect = sourceRect;
+                            Texture2D texture = tileset.Texture;
+                            gameObject.Texture = texture;
+                        }
+                    }
+
+                    // Set properties from Tiled
+                    foreach (var propPair in element.Properties)
+                    {
+                        string propertyName = propPair.Key; // or propPair.Name, depending on the library
+                        Debug.WriteLine($"Property Name: {propertyName}");
+                        string propertyValue = propPair.Value.ToString();
+                        Debug.WriteLine($"Property Value: {propertyValue}");
+
+                        // Get the property info from the game object's type
+                        var propInfo = objectType.GetProperty(propertyName);
+                        if (propInfo != null && propInfo.CanWrite)
+                        {
+                            object value;
+                            // Handle enum types
+                            if (propInfo.PropertyType.IsEnum)
+                            {
+                                value = Enum.Parse(propInfo.PropertyType, propertyValue);
+                            }
+                            // Handle other types
+                            else
+                            {
+                                value = Convert.ChangeType(propertyValue, propInfo.PropertyType);
+                            }
+                            propInfo.SetValue(gameObject, value);
+                        }
+                    }
+
+                    // Add to your game world
+                    _gameObjects.Add(gameObject);
+                }
+            }
+
+        }
+
+
+        private void LoadEntities()
+        {
+            foreach (TiledMapObject entity in _tiledEntityObjects.Objects)
+            {
+                string entityName = entity.Name;
+                string objectName = System.Text.RegularExpressions.Regex.Replace(entityName, @"[\d-]", string.Empty);
+                Debug.WriteLine($"Object Name: {objectName}");
+                Type objectType = Type.GetType("EscapeTheWerehouse_MonoGame.GameBoard.Entities." + objectName);
+                if (objectType != null)
+                {
+                    // Instantiate the object
+                    GameObject gameObject = (GameObject)Activator.CreateInstance(objectType);
+
+                    // Set position and size
+                    gameObject.Position = new Vector2(entity.Position.X, entity.Position.Y - TiledObjectOffset);
+
+                    // Only set SourceRectangle if the entity is a TiledMapTileObject
+                    if (entity is TiledMapTileObject tileEntity)
+                    {
+                        int gid = tileEntity.Tile.LocalTileIdentifier;
+                        var tileset = tileEntity.Tileset;
+                        if (tileset != null)
+                        {
+                            Rectangle sourceRect = tileset.GetTileRegion(gid);
+                            gameObject.SourceRect = sourceRect;
+                            Texture2D texture = tileset.Texture;
+                            gameObject.Texture = texture;
+                        }
+                    }
+
+                    // Set properties from Tiled
+                    foreach (var propPair in entity.Properties)
+                    {
+                        string propertyName = propPair.Key; // or propPair.Name, depending on the library
+                        Debug.WriteLine($"Property Name: {propertyName}");
+                        string propertyValue = propPair.Value.ToString();
+                        Debug.WriteLine($"Property Value: {propertyValue}");
+
+                        // Get the property info from the game object's type
+                        var propInfo = objectType.GetProperty(propertyName);
+                        if (propInfo != null && propInfo.CanWrite)
+                        {
+                            object value;
+                            // Handle enum types
+                            if (propInfo.PropertyType.IsEnum)
+                            {
+                                value = Enum.Parse(propInfo.PropertyType, propertyValue);
+                            }
+                            // Handle other types
+                            else
+                            {
+                                value = Convert.ChangeType(propertyValue, propInfo.PropertyType);
+                            }
+                            propInfo.SetValue(gameObject, value);
+                        }
+                    }
+
+                    // Add to your game world
+                    _gameObjects.Add(gameObject);
+                }
+            }
+        }
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -81,7 +204,7 @@ namespace EscapeTheWerehouse_MonoGame
             //// Check for gamepad input and handle it.
             //CheckGamePadInput();
 
-            //_tiledMapRenderer.Update(gameTime);
+            _tiledMapRenderer.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -180,15 +303,66 @@ namespace EscapeTheWerehouse_MonoGame
             // Begin the sprite batch to prepare for rendering.
             SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            //_tiledMapRenderer.Draw();
+            DrawTileMap();
 
-            // Draw the tilemap.
-            _tilemap.Draw(SpriteBatch);
+            foreach (var gameObject in _gameObjects)
+            {
+                gameObject.Draw(SpriteBatch);
+            }
 
-            // Always end the sprite batch when finished.
             SpriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void DrawTileMap()
+        {
+            // Apply a translation matrix to offset the entire map
+            Matrix translationMatrix = Matrix.CreateTranslation(0, Offset, 0); // Offset by 40 pixels down (Y-axis)
+            _tiledMapRenderer.Draw(translationMatrix);
+        }
+
+        public static void PrintAllGameObjects(List<GameObject> gameObjects)
+        {
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject == null)
+                {
+                    Debug.WriteLine("Null object in list.");
+                    continue;
+                }
+
+                Type type = gameObject.GetType();
+                Debug.WriteLine($"--- {type.Name} ---");
+
+                // Print all public properties
+                foreach (var property in type.GetProperties())
+                {
+                    try
+                    {
+                        object value = property.GetValue(gameObject);
+                        Debug.WriteLine($"{property.Name}: {value}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"{property.Name}: (Error: {ex.Message})");
+                    }
+                }
+
+                // Print all public fields
+                foreach (var field in type.GetFields())
+                {
+                    try
+                    {
+                        object value = field.GetValue(gameObject);
+                        Debug.WriteLine($"{field.Name}: {value}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"{field.Name}: (Error: {ex.Message})");
+                    }
+                }
+            }
         }
 
     }

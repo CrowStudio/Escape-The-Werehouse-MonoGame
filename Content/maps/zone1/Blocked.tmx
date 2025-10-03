@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="8" nextobjectid="38">
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <layer id="1" name="Blocked!" width="6" height="6">
+  <properties>
+   <property name="level" type="int" value="1"/>
+   <property name="minimumMoves" type="int" value="19"/>
+  </properties>
+  <data encoding="csv">
+30,38,39,0,0,51,
+0,0,0,0,0,51,
+41,41,47,56,56,0,
+31,0,46,22,47,0,
+52,0,47,42,0,0,
+93,0,0,40,0,0
+</data>
+ </layer>
+ <objectgroup id="5" name="Elements">
+  <object id="37" template="../object-templates/Exit.tx" x="400" y="100"/>
+  <object id="28" template="../object-templates/Pit1.tx" x="0" y="200"/>
+  <object id="30" template="../object-templates/Pit2.tx" gid="87" x="500" y="300" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="6" name="Entities">
+  <object id="31" template="../object-templates/Box1.tx" x="0" y="400"/>
+  <object id="32" template="../object-templates/Box2.tx" x="300" y="500"/>
+  <object id="33" template="../object-templates/Box3.tx" gid="17" x="300" y="300" width="100" height="100"/>
+  <object id="34" template="../object-templates/Box4.tx" gid="11" x="400" y="300" width="100" height="100"/>
+  <object id="36" template="../object-templates/Player.tx" x="0" y="600"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <object name="Box3" type="Box" gid="11" width="100" height="100">
+  <properties>
+   <property name="Id" type="int" value="3"/>
+   <property name="IsActive" type="bool" value="true"/>
+  </properties>
+ </object>
+</template>

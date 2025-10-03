@@ -10,23 +10,63 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\..\.nuget\packages\dotnet-mgcb\3.8.4\tools\net8.0\any\MonoGame.Framework.Content.Pipeline.dll
-/reference:..\..\..\..\.nuget\packages\monogame.content.builder.task\3.8.4\build\dotnet-tools\.store\dotnet-mgcb\3.8.4\dotnet-mgcb\3.8.4\tools\net8.0\any\MonoGame.Framework.Content.Pipeline.dll
+/reference:..\..\..\..\.nuget\packages\monogame.extended\5.1.0\lib\net8.0\MonoGame.Extended.dll
+/reference:..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\5.1.0\lib\net8.0\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin maps/Blocked.xml
-/copy:maps/Blocked.xml
+#begin maps/sprite_sheet.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:maps/sprite_sheet.tsx
 
-#begin maps/sprite_sheet.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/sprite_sheet.png
+#begin maps/zone1/BackAndForth.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/BackAndForth.tmx
+
+#begin maps/zone1/Blocked.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/Blocked.tmx
+
+#begin maps/zone1/DeceivingPits.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/DeceivingPits.tmx
+
+#begin maps/zone1/EssenceOfOrder.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/EssenceOfOrder.tmx
+
+#begin maps/zone1/OneFourTheRoad.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/OneFourTheRoad.tmx
+
+#begin maps/zone1/OneTooMany.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/OneTooMany.tmx
+
+#begin maps/zone1/Pitorama.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/Pitorama.tmx
+
+#begin maps/zone1/StackOfBoxes.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/StackOfBoxes.tmx
+
+#begin maps/zone1/TheCircleOfLife.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/TheCircleOfLife.tmx
+
+#begin maps/zone1/TrickOrTreat.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:maps/zone1/TrickOrTreat.tmx
 

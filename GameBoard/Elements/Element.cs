@@ -1,6 +1,7 @@
 ﻿using EscapeTheWerehouse_MonoGame.GameBoard.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGameLibrary;
 
 namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 {
@@ -87,14 +88,6 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
         Vertical
     }
 
-    public abstract class GameObject
-    {
-        public int Id { get; set; }
-        public Rectangle Bounds { get; set; }
-        public abstract void Update(GameTime gameTime);
-        public abstract void Draw(SpriteBatch spriteBatch);
-    }
-
     internal class ConveyorBelt
     {
         public int Id { get; set; }
@@ -106,9 +99,10 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
     {
         //public int Id { get; set; }
         public PitState PitState { get; set; }              // Empty / HalfFilled / Filled
+        public int BoxInPit { get; set; }
         public bool IsActive { get; set; }                  // Current state
 
-        public bool TryFill(Box box)
+        public bool TryFill()
         {
             if (PitState == PitState.Filled)
             {
@@ -136,7 +130,49 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw pit
+            if (IsActive)
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
+        }
+    }
+
+    internal class Exit : GameObject
+    {
+        //public int Id { get; set; }
+        public bool IsActive { get; set; }                  // Current state
+
+        public override void Update(GameTime gameTime)
+        {
+            // Update pit logic
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (IsActive)
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
         }
     }
 
@@ -156,7 +192,20 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw pit
+            if (IsActive)
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
         }
     }
 
@@ -172,9 +221,10 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
     {
         //public int Id { get; set; }
         public PitState PitState { get; set; }              // Empty / Filled
+        public int BoxInPit { get; set; }
         public bool IsActive { get; set; }                  // Current state
 
-        public bool TryFill(Box box)
+        public bool TryFill()
         {
             if (PitState == PitState.Filled)
             {
@@ -195,7 +245,20 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw pit
+            if (IsActive)
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
         }
     }
 
@@ -220,7 +283,17 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw pit
+            spriteBatch.Draw(
+                texture: Texture,
+                position: Position,
+                sourceRectangle: SourceRect,
+                color: Color.White,
+                rotation: 0f,
+                origin: Vector2.Zero,
+                scale: 1f,
+                effects: SpriteEffects.None,
+                layerDepth: 0f
+            );
         }
     }
 
@@ -238,7 +311,17 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw pit
+            spriteBatch.Draw(
+                texture: Texture,
+                position: Position,
+                sourceRectangle: SourceRect,
+                color: Color.White,
+                rotation: 0f,
+                origin: Vector2.Zero,
+                scale: 1f,
+                effects: SpriteEffects.None,
+                layerDepth: 0f
+            );
         }
     }
 
@@ -259,7 +342,20 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // Draw pit
+            if (IsActive)
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
         }
     }
 
