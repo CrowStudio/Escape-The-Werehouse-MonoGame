@@ -7,8 +7,6 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
 {
     public class Box : GameObject
     {
-
-        public int BoxInPit { get; set; }
         public bool IsActive { get; set; } = true; // True if not destroyed (e.g., by BottomlessPit)
 
         ////Move the box in a direction(called by player or conveyor belts)

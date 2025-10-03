@@ -1,6 +1,75 @@
 {
     "maps": [
-
+        {
+            "fileName": "Blocked.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "fileName": "DeceivingPits.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 600,
+            "y": 0
+        },
+        {
+            "fileName": "OneTooMany.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 1200,
+            "y": 0
+        },
+        {
+            "fileName": "BackAndForth.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 1800,
+            "y": 0
+        },
+        {
+            "fileName": "TheCircleOfLife.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 2400,
+            "y": 0
+        },
+        {
+            "fileName": "TrickOrTreat.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 3000,
+            "y": 0
+        },
+        {
+            "fileName": "EssenceOfOrder.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 3600,
+            "y": 0
+        },
+        {
+            "fileName": "Pitorama.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 4200,
+            "y": 0
+        },
+        {
+            "fileName": "StackOfBoxes.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 4800,
+            "y": 0
+        },
+        {
+            "fileName": "OneFourTheRoad.tmx",
+            "height": 600,
+            "width": 600,
+            "x": 5400,
+            "y": 0
+        }
     ],
     "onlyShowAdjacentMaps": false,
     "type": "world"

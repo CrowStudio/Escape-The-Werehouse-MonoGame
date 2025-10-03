@@ -32,10 +32,10 @@ namespace EscapeTheWerehouse_MonoGame
 
         private TiledMapObjectLayer _tiledEntityObjects;
 
-        private static readonly int _offset = 40;
-        private static readonly int _tiledObjectOffset = 100 - _offset;
-
         private List<GameObject> _gameObjects = [];
+
+        private const int Offset = 40;
+        private const int TiledObjectOffset = 100 - Offset;
 
         public EscapeTheWerehouse() : base("Escape The Werehouse!", 600, 640, false)
         {
@@ -51,14 +51,14 @@ namespace EscapeTheWerehouse_MonoGame
         protected override void LoadContent()
         {
 
-            _tiledMap = Content.Load<TiledMap>("maps/Blocked");                             // Sort out map path later, to be able to load the maps dynamically
+            _tiledMap = Content.Load<TiledMap>("maps/zone1/Pitorama");                      // Sort out map path later, to be able to load the maps dynamically
             _tiledElementObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Elements");     // Elements like pits, switches, doors, etc.
             _tiledEntityObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Entities");      // ATM only player and boxes
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
             LoadElements();
             LoadEntities();
-            PrintAllGameObjects(_gameObjects);
+            PrintAllGameObjects(_gameObjects);                                              // Debug print to see that all objects are created with correct variables
 
             base.LoadContent();
         }
@@ -78,7 +78,7 @@ namespace EscapeTheWerehouse_MonoGame
                     GameObject gameObject = (GameObject)Activator.CreateInstance(objectType);
 
                     // Set position and size
-                    gameObject.Position = new Vector2(element.Position.X, element.Position.Y - _tiledObjectOffset);
+                    gameObject.Position = new Vector2(element.Position.X, element.Position.Y - TiledObjectOffset);
 
                     // Only set SourceRectangle if the entity is a TiledMapTileObject
                     if (element is TiledMapTileObject tileElement)
@@ -129,7 +129,6 @@ namespace EscapeTheWerehouse_MonoGame
         }
 
 
-
         private void LoadEntities()
         {
             foreach (TiledMapObject entity in _tiledEntityObjects.Objects)
@@ -144,7 +143,7 @@ namespace EscapeTheWerehouse_MonoGame
                     GameObject gameObject = (GameObject)Activator.CreateInstance(objectType);
 
                     // Set position and size
-                    gameObject.Position = new Vector2(entity.Position.X, entity.Position.Y - _tiledObjectOffset);
+                    gameObject.Position = new Vector2(entity.Position.X, entity.Position.Y - TiledObjectOffset);
 
                     // Only set SourceRectangle if the entity is a TiledMapTileObject
                     if (entity is TiledMapTileObject tileEntity)
@@ -319,48 +318,8 @@ namespace EscapeTheWerehouse_MonoGame
         private void DrawTileMap()
         {
             // Apply a translation matrix to offset the entire map
-            Matrix translationMatrix = Matrix.CreateTranslation(0, _offset, 0); // Offset by 40 pixels down (Y-axis)
+            Matrix translationMatrix = Matrix.CreateTranslation(0, Offset, 0); // Offset by 40 pixels down (Y-axis)
             _tiledMapRenderer.Draw(translationMatrix);
-
-            //foreach (TiledMapObject obj in _tiledElementObjects.Objects)
-            //{
-            //    DrawObject(obj);
-            //}
-
-            //foreach (TiledMapObject obj in _tiledEntityObjects.Objects)
-            //{
-            //    DrawObject(obj);
-            //}
-        }
-
-        private static void DrawObject(TiledMapObject obj)
-        {
-            if (obj is TiledMapTileObject tileObj)
-            {
-                int gid = tileObj.Tile.LocalTileIdentifier;
-                var tileset = tileObj.Tileset;
-                if (tileset == null) return;
-
-                Rectangle sourceRect = tileset.GetTileRegion(gid);
-
-                // Adjust position if needed (e.g., subtract tile height)
-                Vector2 drawPosition = new Vector2(
-                    tileObj.Position.X,
-                    tileObj.Position.Y - _tiledObjectOffset
-                );
-
-                SpriteBatch.Draw(
-                    texture: tileset.Texture,
-                    position: drawPosition,
-                    sourceRectangle: sourceRect,
-                    color: Color.White,
-                    rotation: 0f,
-                    origin: Vector2.Zero,
-                    scale: 1f,
-                    effects: SpriteEffects.None,
-                    layerDepth: 0f
-                );
-            }
         }
 
         public static void PrintAllGameObjects(List<GameObject> gameObjects)

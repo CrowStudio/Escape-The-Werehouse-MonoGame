@@ -15,7 +15,7 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
         public int MoveSpeed { get; set; } = 1; // Tiles per move
 
         // Health and status
-        public int Lives { get; set; } = 3;
+        public int Lives { get; set; }
         public bool IsAlive => Lives > 0;
 
         //// Update player state (called every frame)

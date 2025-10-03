@@ -99,6 +99,7 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
     {
         //public int Id { get; set; }
         public PitState PitState { get; set; }              // Empty / HalfFilled / Filled
+        public int BoxInPit { get; set; }
         public bool IsActive { get; set; }                  // Current state
 
         public bool TryFill()
@@ -121,6 +122,35 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
                 return true;
             }
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            // Update pit logic
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (IsActive)
+            {
+                spriteBatch.Draw(
+                    texture: Texture,
+                    position: Position,
+                    sourceRectangle: SourceRect,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: Vector2.Zero,
+                    scale: 1f,
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+            }
+        }
+    }
+
+    internal class Exit : GameObject
+    {
+        //public int Id { get; set; }
+        public bool IsActive { get; set; }                  // Current state
 
         public override void Update(GameTime gameTime)
         {
@@ -191,6 +221,7 @@ namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
     {
         //public int Id { get; set; }
         public PitState PitState { get; set; }              // Empty / Filled
+        public int BoxInPit { get; set; }
         public bool IsActive { get; set; }                  // Current state
 
         public bool TryFill()

@@ -3,7 +3,6 @@
  <tileset firstgid="1" source="../sprite_sheet.tsx"/>
  <object name="Box2" type="Box" gid="12" width="100" height="100">
   <properties>
-   <property name="BoxInPit" type="int" value="0"/>
    <property name="Id" type="int" value="2"/>
    <property name="IsActive" type="bool" value="true"/>
   </properties>
