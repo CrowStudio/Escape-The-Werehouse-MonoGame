@@ -1,14 +1,22 @@
 ﻿using EscapeTheWerehouse_MonoGame.GameBoard;
+using EscapeTheWerehouse_MonoGame.GameBoard.Elements;
+using EscapeTheWerehouse_MonoGame.GameBoard.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Collisions.Layers;
+using MonoGame.Extended.ECS;
 using MonoGame.Extended.Tiled;
 using MonoGame.Extended.Tiled.Renderers;
 using MonoGameLibrary;
 using MonoGameLibrary.Graphics;
 using MonoGameLibrary.Input;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Xml.Linq;
 
 namespace EscapeTheWerehouse_MonoGame
 {
@@ -24,8 +32,10 @@ namespace EscapeTheWerehouse_MonoGame
 
         private TiledMapObjectLayer _tiledEntityObjects;
 
-        private static int _offset = 40;
-        private static int _tiledObjectOffset = 100 - _offset;
+        private static readonly int _offset = 40;
+        private static readonly int _tiledObjectOffset = 100 - _offset;
+
+        private List<GameObject> _gameObjects = [];
 
         public EscapeTheWerehouse() : base("Escape The Werehouse!", 600, 640, false)
         {
@@ -41,15 +51,148 @@ namespace EscapeTheWerehouse_MonoGame
         protected override void LoadContent()
         {
 
-            _tiledMap = Content.Load<TiledMap>("maps/Blocked");
-
-            _tiledElementObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Elements");
-            _tiledEntityObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Entities");
-
+            _tiledMap = Content.Load<TiledMap>("maps/Blocked");                             // Sort out map path later, to be able to load the maps dynamically
+            _tiledElementObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Elements");     // Elements like pits, switches, doors, etc.
+            _tiledEntityObjects = _tiledMap.GetLayer<TiledMapObjectLayer>("Entities");      // ATM only player and boxes
             _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
+
+            LoadElements();
+            LoadEntities();
+            PrintAllGameObjects(_gameObjects);
 
             base.LoadContent();
         }
+
+
+        private void LoadElements()
+        {
+            foreach (TiledMapObject element in _tiledElementObjects.Objects)
+            {
+                string elementName = element.Name;
+                string objectName = System.Text.RegularExpressions.Regex.Replace(elementName, @"[\d-]", string.Empty);
+                Debug.WriteLine($"Object Name: {objectName}");
+                Type objectType = Type.GetType("EscapeTheWerehouse_MonoGame.GameBoard.Elements." + objectName);
+                if (objectType != null)
+                {
+                    // Instantiate the object
+                    GameObject gameObject = (GameObject)Activator.CreateInstance(objectType);
+
+                    // Set position and size
+                    gameObject.Position = new Vector2(element.Position.X, element.Position.Y - _tiledObjectOffset);
+
+                    // Only set SourceRectangle if the entity is a TiledMapTileObject
+                    if (element is TiledMapTileObject tileElement)
+                    {
+                        int gid = tileElement.Tile.LocalTileIdentifier;
+                        var tileset = tileElement.Tileset;
+                        if (tileset != null)
+                        {
+                            Rectangle sourceRect = tileset.GetTileRegion(gid);
+                            gameObject.SourceRect = sourceRect;
+                            Texture2D texture = tileset.Texture;
+                            gameObject.Texture = texture;
+                        }
+                    }
+
+                    // Set properties from Tiled
+                    foreach (var propPair in element.Properties)
+                    {
+                        string propertyName = propPair.Key; // or propPair.Name, depending on the library
+                        Debug.WriteLine($"Property Name: {propertyName}");
+                        string propertyValue = propPair.Value.ToString();
+                        Debug.WriteLine($"Property Value: {propertyValue}");
+
+                        // Get the property info from the game object's type
+                        var propInfo = objectType.GetProperty(propertyName);
+                        if (propInfo != null && propInfo.CanWrite)
+                        {
+                            object value;
+                            // Handle enum types
+                            if (propInfo.PropertyType.IsEnum)
+                            {
+                                value = Enum.Parse(propInfo.PropertyType, propertyValue);
+                            }
+                            // Handle other types
+                            else
+                            {
+                                value = Convert.ChangeType(propertyValue, propInfo.PropertyType);
+                            }
+                            propInfo.SetValue(gameObject, value);
+                        }
+                    }
+
+                    // Add to your game world
+                    _gameObjects.Add(gameObject);
+                }
+            }
+
+        }
+
+
+
+        private void LoadEntities()
+        {
+            foreach (TiledMapObject entity in _tiledEntityObjects.Objects)
+            {
+                string entityName = entity.Name;
+                string objectName = System.Text.RegularExpressions.Regex.Replace(entityName, @"[\d-]", string.Empty);
+                Debug.WriteLine($"Object Name: {objectName}");
+                Type objectType = Type.GetType("EscapeTheWerehouse_MonoGame.GameBoard.Entities." + objectName);
+                if (objectType != null)
+                {
+                    // Instantiate the object
+                    GameObject gameObject = (GameObject)Activator.CreateInstance(objectType);
+
+                    // Set position and size
+                    gameObject.Position = new Vector2(entity.Position.X, entity.Position.Y - _tiledObjectOffset);
+
+                    // Only set SourceRectangle if the entity is a TiledMapTileObject
+                    if (entity is TiledMapTileObject tileEntity)
+                    {
+                        int gid = tileEntity.Tile.LocalTileIdentifier;
+                        var tileset = tileEntity.Tileset;
+                        if (tileset != null)
+                        {
+                            Rectangle sourceRect = tileset.GetTileRegion(gid);
+                            gameObject.SourceRect = sourceRect;
+                            Texture2D texture = tileset.Texture;
+                            gameObject.Texture = texture;
+                        }
+                    }
+
+                    // Set properties from Tiled
+                    foreach (var propPair in entity.Properties)
+                    {
+                        string propertyName = propPair.Key; // or propPair.Name, depending on the library
+                        Debug.WriteLine($"Property Name: {propertyName}");
+                        string propertyValue = propPair.Value.ToString();
+                        Debug.WriteLine($"Property Value: {propertyValue}");
+
+                        // Get the property info from the game object's type
+                        var propInfo = objectType.GetProperty(propertyName);
+                        if (propInfo != null && propInfo.CanWrite)
+                        {
+                            object value;
+                            // Handle enum types
+                            if (propInfo.PropertyType.IsEnum)
+                            {
+                                value = Enum.Parse(propInfo.PropertyType, propertyValue);
+                            }
+                            // Handle other types
+                            else
+                            {
+                                value = Convert.ChangeType(propertyValue, propInfo.PropertyType);
+                            }
+                            propInfo.SetValue(gameObject, value);
+                        }
+                    }
+
+                    // Add to your game world
+                    _gameObjects.Add(gameObject);
+                }
+            }
+        }
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -163,6 +306,11 @@ namespace EscapeTheWerehouse_MonoGame
 
             DrawTileMap();
 
+            foreach (var gameObject in _gameObjects)
+            {
+                gameObject.Draw(SpriteBatch);
+            }
+
             SpriteBatch.End();
 
             base.Draw(gameTime);
@@ -174,18 +322,18 @@ namespace EscapeTheWerehouse_MonoGame
             Matrix translationMatrix = Matrix.CreateTranslation(0, _offset, 0); // Offset by 40 pixels down (Y-axis)
             _tiledMapRenderer.Draw(translationMatrix);
 
-            foreach (TiledMapObject obj in _tiledElementObjects.Objects)
-            {
-                DrawObject(obj);
-            }
+            //foreach (TiledMapObject obj in _tiledElementObjects.Objects)
+            //{
+            //    DrawObject(obj);
+            //}
 
-            foreach (TiledMapObject obj in _tiledEntityObjects.Objects)
-            {
-                DrawObject(obj);
-            }
+            //foreach (TiledMapObject obj in _tiledEntityObjects.Objects)
+            //{
+            //    DrawObject(obj);
+            //}
         }
 
-        private void DrawObject(TiledMapObject obj)
+        private static void DrawObject(TiledMapObject obj)
         {
             if (obj is TiledMapTileObject tileObj)
             {
@@ -215,7 +363,48 @@ namespace EscapeTheWerehouse_MonoGame
             }
         }
 
+        public static void PrintAllGameObjects(List<GameObject> gameObjects)
+        {
+            foreach (var gameObject in gameObjects)
+            {
+                if (gameObject == null)
+                {
+                    Debug.WriteLine("Null object in list.");
+                    continue;
+                }
 
+                Type type = gameObject.GetType();
+                Debug.WriteLine($"--- {type.Name} ---");
+
+                // Print all public properties
+                foreach (var property in type.GetProperties())
+                {
+                    try
+                    {
+                        object value = property.GetValue(gameObject);
+                        Debug.WriteLine($"{property.Name}: {value}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"{property.Name}: (Error: {ex.Message})");
+                    }
+                }
+
+                // Print all public fields
+                foreach (var field in type.GetFields())
+                {
+                    try
+                    {
+                        object value = field.GetValue(gameObject);
+                        Debug.WriteLine($"{field.Name}: {value}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"{field.Name}: (Error: {ex.Message})");
+                    }
+                }
+            }
+        }
 
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="50">
+ <tileset firstgid="1" source="../sprite_sheet.tsx"/>
+ <layer id="1" name="Deceiving Pits" width="6" height="6">
+  <properties>
+   <property name="minimumMoves" type="int" value="24"/>
+  </properties>
+  <data encoding="csv">
+18,31,60,58,23,0,
+36,25,29,0,32,0,
+0,0,0,0,0,0,
+0,51,58,61,36,30,
+0,35,0,24,54,38,
+0,93,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="2" name="Elements">
+  <object id="34" template="../object-templates/BottomlessPit.tx" x="200" y="300"/>
+  <object id="35" template="../object-templates/BottomlessPit.tx" x="100" y="300"/>
+  <object id="36" template="../object-templates/BottomlessPit.tx" x="0" y="300"/>
+  <object id="37" template="../object-templates/BottomlessPit.tx" x="0" y="600"/>
+  <object id="39" template="../object-templates/BottomlessPit.tx" x="200" y="600"/>
+  <object id="41" template="../object-templates/BottomlessPit.tx" x="0" y="400"/>
+  <object id="42" template="../object-templates/BottomlessPit.tx" x="500" y="100" rotation="0"/>
+  <object id="43" template="../object-templates/BottomlessPit.tx" x="500" y="200"/>
+  <object id="44" template="../object-templates/Pit1.tx" gid="78" x="400" y="300" width="100" height="100"/>
+  <object id="49" template="../object-templates/BottomlessPit.tx" gid="85" x="300" y="300" width="100" height="100"/>
+ </objectgroup>
+ <objectgroup id="3" name="Entities">
+  <object id="45" template="../object-templates/Box1.tx" gid="12" x="500" y="400" width="100" height="100"/>
+  <object id="46" template="../object-templates/Box2.tx" gid="17" x="400" y="100" width="100" height="100"/>
+  <object id="47" template="../object-templates/Box3.tx" x="300" y="100"/>
+  <object id="48" template="../object-templates/Player.tx" x="100" y="600"/>
+ </objectgroup>
+</map>
