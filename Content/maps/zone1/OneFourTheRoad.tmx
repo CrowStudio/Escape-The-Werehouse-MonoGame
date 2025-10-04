@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="20">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="left-up" width="6" height="6" tilewidth="100" tileheight="100" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="4" nextobjectid="21">
  <tileset firstgid="1" source="../sprite_sheet.tsx"/>
  <layer id="1" name="One Four the Road" width="6" height="6">
   <properties>
@@ -8,28 +8,41 @@
   </properties>
   <data encoding="csv">
 0,30,0,0,47,37,
-22,0,0,0,44,61,
-0,0,93,0,44,37,
+22,0,0,0,44,41,
+0,0,115,0,44,37,
 0,0,51,37,22,48,
-49,57,0,22,39,0,
-28,43,38,36,58,0
+49,19,0,22,39,0,
+28,43,38,36,21,0
 </data>
  </layer>
  <objectgroup id="2" name="Elements">
   <object id="19" template="../object-templates/Exit.tx" x="0" y="300"/>
   <object id="4" template="../object-templates/Pit1.tx" x="200" y="500"/>
-  <object id="5" template="../object-templates/Pit2.tx" x="300" y="100"/>
-  <object id="6" template="../object-templates/Pit3.tx" x="200" y="100"/>
+  <object id="5" template="../object-templates/Pit2.tx" gid="92" x="300" y="100" width="100" height="100"/>
+  <object id="6" template="../object-templates/Pit3.tx" gid="100" x="200" y="100" width="100" height="100"/>
   <object id="7" template="../object-templates/Pit4.tx" x="0" y="100"/>
-  <object id="1" template="../object-templates/BottomlessPit.tx" x="500" y="600"/>
-  <object id="2" template="../object-templates/BottomlessPit.tx" gid="84" x="0" y="400" width="100" height="100"/>
-  <object id="3" template="../object-templates/BottomlessPit.tx" gid="2147483728" x="300" y="300" width="100" height="100" rotation="0"/>
+  <object id="1" template="../object-templates/BottomlessPit.tx" gid="104" x="500" y="600" width="100" height="100"/>
+  <object id="2" template="../object-templates/BottomlessPit.tx" gid="84" x="0" y="400" width="100" height="100">
+   <properties>
+    <property name="Id" type="int" value="3"/>
+   </properties>
+  </object>
+  <object id="3" template="../object-templates/BottomlessPit.tx" gid="2147483721" x="300" y="300" width="100" height="100" rotation="0">
+   <properties>
+    <property name="Id" type="int" value="4"/>
+   </properties>
+  </object>
+  <object id="20" template="../object-templates/BottomlessPit.tx" gid="83" x="500" y="500" width="100" height="100">
+   <properties>
+    <property name="Id" type="int" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="3" name="Entities">
-  <object id="9" template="../object-templates/Box1.tx" gid="11" x="0" y="600" width="100" height="100"/>
+  <object id="9" template="../object-templates/Box1.tx" gid="1" x="0" y="600" width="100" height="100"/>
   <object id="17" template="../object-templates/Box2.tx" gid="6" x="100" y="500" width="100" height="100"/>
-  <object id="18" template="../object-templates/Box3.tx" gid="12" x="500" y="400" width="100" height="100"/>
-  <object id="15" template="../object-templates/Box4.tx" gid="12" x="500" y="300" width="100" height="100"/>
+  <object id="18" template="../object-templates/Box3.tx" gid="7" x="500" y="400" width="100" height="100"/>
+  <object id="15" template="../object-templates/Box4.tx" gid="1" x="500" y="300" width="100" height="100"/>
   <object id="16" template="../object-templates/Box5.tx" x="0" y="500"/>
   <object id="8" template="../object-templates/Player.tx" x="200" y="300">
    <properties>

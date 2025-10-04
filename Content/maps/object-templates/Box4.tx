@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
  <tileset firstgid="1" source="../sprite_sheet.tsx"/>
- <object name="Box4" type="Box" gid="17" width="100" height="100">
+ <object name="Box4" type="Box" gid="6" width="100" height="100">
   <properties>
    <property name="Id" type="int" value="4"/>
    <property name="IsActive" type="bool" value="true"/>

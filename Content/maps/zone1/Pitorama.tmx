@@ -7,28 +7,28 @@
    <property name="minimumMoves" type="int" value="77"/>
   </properties>
   <data encoding="csv">
-0,50,45,34,57,56,
-39,57,0,22,47,58,
-0,44,59,30,0,0,
-0,0,93,0,31,0,
+0,50,45,34,45,56,
+39,56,0,22,47,17,
+0,44,40,30,0,0,
+0,0,115,0,31,0,
 0,0,0,23,26,0,
 56,33,47,24,51,0
 </data>
  </layer>
  <objectgroup id="2" name="Elements">
   <object id="30" template="../object-templates/Exit.tx" x="500" y="400"/>
-  <object id="1" template="../object-templates/Pit1.tx" x="0" y="300"/>
+  <object id="1" template="../object-templates/Pit1.tx" gid="83" x="0" y="300" width="100" height="100"/>
   <object id="2" template="../object-templates/Pit2.tx" x="0" y="100"/>
-  <object id="3" template="../object-templates/Pit3.tx" gid="88" x="0" y="400" width="100" height="100"/>
-  <object id="24" template="../object-templates/Pit4.tx" x="0" y="500"/>
-  <object id="25" template="../object-templates/Pit5.tx" gid="2147483727" x="500" y="500" width="100" height="100" rotation="0"/>
-  <object id="29" template="../object-templates/BottomlessPit.tx" x="500" y="600"/>
+  <object id="3" template="../object-templates/Pit3.tx" gid="105" x="0" y="400" width="100" height="100"/>
+  <object id="24" template="../object-templates/Pit4.tx" gid="104" x="0" y="500" width="100" height="100"/>
+  <object id="25" template="../object-templates/Pit5.tx" gid="83" x="500" y="500" width="100" height="100" rotation="0"/>
+  <object id="29" template="../object-templates/BottomlessPit.tx" gid="104" x="500" y="600" width="100" height="100"/>
  </objectgroup>
  <objectgroup id="3" name="Entities">
-  <object id="6" template="../object-templates/Box1.tx" gid="11" x="300" y="300" width="100" height="100"/>
-  <object id="11" template="../object-templates/Box2.tx" x="400" y="100"/>
-  <object id="8" template="../object-templates/Box3.tx" gid="6" x="0" y="200" width="100" height="100"/>
-  <object id="18" template="../object-templates/Box4.tx" x="500" y="200"/>
+  <object id="6" template="../object-templates/Box1.tx" gid="6" x="300" y="300" width="100" height="100"/>
+  <object id="11" template="../object-templates/Box2.tx" gid="7" x="400" y="100" width="100" height="100"/>
+  <object id="8" template="../object-templates/Box3.tx" gid="1" x="0" y="200" width="100" height="100"/>
+  <object id="18" template="../object-templates/Box4.tx" gid="12" x="500" y="200" width="100" height="100"/>
   <object id="21" template="../object-templates/Box5.tx" x="400" y="400"/>
   <object id="5" template="../object-templates/Player.tx" x="200" y="400"/>
  </objectgroup>

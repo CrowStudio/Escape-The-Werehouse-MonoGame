@@ -7,11 +7,11 @@
    <property name="minimumMoves" type="int" value="40"/>
   </properties>
   <data encoding="csv">
-93,0,0,0,60,45,
+115,0,0,0,34,45,
 45,0,0,40,46,52,
 31,49,35,0,0,0,
 48,30,50,0,53,27,
-0,45,57,0,46,49,
+0,45,19,0,46,49,
 0,0,0,0,30,32
 </data>
  </layer>
@@ -19,12 +19,12 @@
   <object id="15" template="../object-templates/Exit.tx" x="200" y="100"/>
   <object id="12" template="../object-templates/Pit1.tx" x="300" y="400"/>
   <object id="13" template="../object-templates/Pit2.tx" gid="78" x="400" y="300" width="100" height="100"/>
-  <object id="14" template="../object-templates/Pit3.tx" gid="82" x="300" y="100" width="100" height="100"/>
+  <object id="14" template="../object-templates/Pit3.tx" gid="73" x="300" y="100" width="100" height="100"/>
  </objectgroup>
  <objectgroup id="3" name="Entities">
   <object id="9" template="../object-templates/Box1.tx" gid="12" x="0" y="400" width="100" height="100"/>
-  <object id="10" template="../object-templates/Box2.tx" gid="11" x="500" y="400" width="100" height="100"/>
-  <object id="11" template="../object-templates/Box3.tx" gid="17" x="400" y="500" width="100" height="100"/>
+  <object id="10" template="../object-templates/Box2.tx" gid="1" x="500" y="400" width="100" height="100"/>
+  <object id="11" template="../object-templates/Box3.tx" gid="7" x="400" y="500" width="100" height="100"/>
   <object id="8" template="../object-templates/Player.tx" x="0" y="100">
    <properties>
     <property name="Direction" type="int" propertytype="Direction" value="1"/>

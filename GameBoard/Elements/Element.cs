@@ -1,91 +1,36 @@
 ﻿using EscapeTheWerehouse_MonoGame.GameBoard.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameLibrary;
+using MonoGameLibrary.GameObjects;
+using MonoGameLibrary.Core;
 
 namespace EscapeTheWerehouse_MonoGame.GameBoard.Elements
 {
-    // Board elements
-    public enum Element
-    {
-        Start,
-        Floor,
-        Wall,
-        Pit,                    // Takes one box to fill
-        DeepPit,                // Takes two boxes to fill
-        BottomlessPit,          // Cannot be filled or walked on
-        FloorSwitch,
-        TrapDoor,
-        WallSwitch,
-        SlidingDoor,
-        Pusher,
-        ConveyorBelt,
-        LazerBeam,
-        Duplicator,
-        Teleporter,
-        Elevator,
-        Exit
 
-    }
-
-    // Additional enums for different tiles
-    public enum PitState
+    internal class BottomlessPit : GameObject
     {
-        Empty,                  // No boxes in the pit
-        HalfFilled,             // One box in a DeepPit (or unused for Pit/BottomlessPit)
-        Filled                  // Pit is fully filled (one box for Pit, two boxes for DeepPit)
-    }
+        public int BoxInPit { get; set; }
+        public bool IsActive { get; set; }
 
-    public enum SwitchType
-    {
-        Latching,
-        LatchingExit,
-        Momentary,
-        MomentaryExit
-    }
+        public override void Update(GameTime gameTime)
+        {
+            // Update pit logic
+        }
 
-    public enum ConnectionType
-    {
-        SlidingDoor,
-        TrapDoor,
-        Pusher,
-        ConveyorBelt,
-        LazerBeam,
-        Elevator
-    }
-
-    public enum PusherType
-    {
-        Normal,                 // Pushes one tile
-        Powerful                // Pushes two tiles
-    }
-
-    public enum BeltSpeed
-    {
-        Normal,                 // Moves one tile/s
-        Fast                    // Moves two tiles/s
-    }
-
-    public enum DefaultState
-    {
-        NormallyOn,             // E.g.switch will activate by default and open a connected closed door
-        NormallyOff,            // E.g lazer will be deactivate by default
-        NormallyOpen,           // E.g sliding door is open and passable by default
-        NormallyClosed          // E.g Trap door is closed and passable by default
-    }
-
-    public enum Direction
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
-    public enum Orientation
-    {
-        Horizontal,
-        Vertical
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(
+                texture: Texture,
+                position: Position,
+                sourceRectangle: SourceRect,
+                color: Color.White,
+                rotation: 0f,
+                origin: Vector2.Zero,
+                scale: 1f,
+                effects: SpriteEffects.None,
+                layerDepth: 0f
+            );
+        }
     }
 
     internal class ConveyorBelt

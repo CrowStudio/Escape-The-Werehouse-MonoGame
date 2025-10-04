@@ -1,7 +1,7 @@
 ﻿using EscapeTheWerehouse_MonoGame.GameBoard.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGameLibrary;
+using MonoGameLibrary.GameObjects;
 
 namespace EscapeTheWerehouse_MonoGame.GameBoard.Entities
 {

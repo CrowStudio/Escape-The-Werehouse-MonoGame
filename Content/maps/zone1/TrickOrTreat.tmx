@@ -7,26 +7,26 @@
    <property name="minimumMoves" type="int" value="58"/>
   </properties>
   <data encoding="csv">
-40,36,33,57,35,28,
-35,57,0,38,0,30,
-51,42,0,59,28,32,
-57,0,0,0,0,31,
-0,0,0,93,35,50,
+40,36,33,33,35,28,
+35,43,0,38,0,30,
+51,42,0,25,28,32,
+31,0,0,0,0,31,
+0,0,0,115,35,50,
 0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup id="2" name="Elements">
   <object id="13" template="../object-templates/Exit.tx" x="0" y="600"/>
-  <object id="1" template="../object-templates/Pit1.tx" gid="78" x="100" y="400" width="100" height="100"/>
-  <object id="2" template="../object-templates/Pit2.tx" gid="78" x="100" y="500" width="100" height="100"/>
-  <object id="3" template="../object-templates/Pit3.tx" x="100" y="600"/>
-  <object id="12" template="../object-templates/BottomlessPit.tx" gid="84" x="400" y="200" width="100" height="100"/>
+  <object id="1" template="../object-templates/Pit1.tx" gid="83" x="100" y="400" width="100" height="100"/>
+  <object id="2" template="../object-templates/Pit2.tx" gid="105" x="100" y="500" width="100" height="100"/>
+  <object id="3" template="../object-templates/Pit3.tx" gid="104" x="100" y="600" width="100" height="100"/>
+  <object id="12" template="../object-templates/BottomlessPit.tx" gid="75" x="400" y="200" width="100" height="100"/>
  </objectgroup>
  <objectgroup id="3" name="Entities">
-  <object id="5" template="../object-templates/Box1.tx" gid="12" x="100" y="300" width="100" height="100"/>
-  <object id="6" template="../object-templates/Box2.tx" gid="6" x="500" y="100" width="100" height="100"/>
-  <object id="7" template="../object-templates/Box3.tx" x="500" y="200"/>
-  <object id="8" template="../object-templates/Box4.tx" x="0" y="400"/>
+  <object id="5" template="../object-templates/Box1.tx" gid="7" x="100" y="300" width="100" height="100"/>
+  <object id="6" template="../object-templates/Box2.tx" gid="1" x="500" y="100" width="100" height="100"/>
+  <object id="7" template="../object-templates/Box3.tx" gid="6" x="500" y="200" width="100" height="100"/>
+  <object id="8" template="../object-templates/Box4.tx" gid="12" x="0" y="400" width="100" height="100"/>
   <object id="4" template="../object-templates/Player.tx" x="300" y="500">
    <properties>
     <property name="Direction" type="int" propertytype="Direction" value="3"/>

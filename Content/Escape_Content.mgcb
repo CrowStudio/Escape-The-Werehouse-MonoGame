@@ -23,50 +23,50 @@
 #begin maps/zone1/BackAndForth.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/BackAndForth.tmx
+/build:maps/zone1/BackAndForth.tmx;maps/zone1/BackAndForth
 
 #begin maps/zone1/Blocked.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/Blocked.tmx
+/build:maps/zone1/Blocked.tmx;maps/zone1/Blocked
 
 #begin maps/zone1/DeceivingPits.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/DeceivingPits.tmx
+/build:maps/zone1/DeceivingPits.tmx;maps/zone1/DeceivingPits
 
 #begin maps/zone1/EssenceOfOrder.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/EssenceOfOrder.tmx
+/build:maps/zone1/EssenceOfOrder.tmx;maps/zone1/EssenceOfOrder
 
 #begin maps/zone1/OneFourTheRoad.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/OneFourTheRoad.tmx
+/build:maps/zone1/OneFourTheRoad.tmx;maps/zone1/OneFourTheRoad
 
 #begin maps/zone1/OneTooMany.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/OneTooMany.tmx
+/build:maps/zone1/OneTooMany.tmx;maps/zone1/OneTooMany
 
 #begin maps/zone1/Pitorama.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/Pitorama.tmx
+/build:maps/zone1/Pitorama.tmx;maps/zone1/Pitorama
 
 #begin maps/zone1/StackOfBoxes.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/StackOfBoxes.tmx
+/build:maps/zone1/StackOfBoxes.tmx;maps/zone1/StackOfBoxes
 
 #begin maps/zone1/TheCircleOfLife.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/TheCircleOfLife.tmx
+/build:maps/zone1/TheCircleOfLife.tmx;maps/zone1/TheCircleOfLife
 
 #begin maps/zone1/TrickOrTreat.tmx
 /importer:TiledMapImporter
 /processor:TiledMapProcessor
-/build:maps/zone1/TrickOrTreat.tmx
+/build:maps/zone1/TrickOrTreat.tmx;maps/zone1/TrickOrTreat
 
